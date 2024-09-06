@@ -1,4 +1,5 @@
-![Gemini_Generated_Image_hbkdk0hbkdk0hbkd](https://github.com/user-attachments/assets/ae8a4f23-6994-4229-978b-ec5862571457)
+![Gemini_Generated_Image_small](https://github.com/user-attachments/assets/4f7f1a5f-de2d-450b-b735-eb843ef5b0d7)
+
 
 MetroEase: Shortest Route Finder - 
 
