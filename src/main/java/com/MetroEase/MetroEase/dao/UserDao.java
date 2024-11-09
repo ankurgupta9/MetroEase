@@ -93,9 +93,9 @@ import java.sql.*;
 @Repository
 public class UserDao {
 
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/metroease_db";
+    private static final String JDBC_URL = System.getenv("DB_URL"); //"jdbc:mysql://mysql.railway.internal:3306/railway";
     private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "";
+    private static final String DB_PASSWORD = System.getenv("DB_PASSWORD"); //"gawWcXTtCbaEBTYpITsbHAYCNAGAqImh";
 
     public User findByUsername(String username) {
         try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USERNAME, DB_PASSWORD);
