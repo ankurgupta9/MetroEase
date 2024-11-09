@@ -28,9 +28,7 @@
         <url/>
     </scm>
     <properties>
-       <maven.compiler.source>17</maven.compiler.source>
-       <maven.compiler.target>17</maven.compiler.target>
-       <java.version>17</java.version>
+        <java.version>21</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -51,16 +49,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-<!--         <dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.29</version>
-        </dependency> -->
-<!--         <dependency>
+        </dependency>
+        <dependency>
            <groupId>org.springframework.security</groupId>
            <artifactId>spring-security-core</artifactId>
            <version>5.8.0</version> 
-        </dependency> -->
+        </dependency>
 
     </dependencies>
 
