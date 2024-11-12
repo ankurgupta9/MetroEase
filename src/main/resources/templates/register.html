@@ -46,7 +46,7 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password:</label>
-                <input type="password" id="password" class="form-control" th:field="*{password}" required>
+                <input type="password" id="password" class="form-control" th:field="*{password}" required minlength="6">
             </div>
             <div class="mb-3">
                 <label for="confirmPassword" class="form-label">Confirm Password:</label>
@@ -55,7 +55,8 @@
             <div class="mb-3" align="center">
                 <button type="submit" class="btn btn-success px-5">Register</button>
             </div>
-            <p class="text-danger" th:if="${error}" th:text="${error}"></p>
+            <p class="text-danger text-center" th:if="${error}" th:text="${error}"></p>
+            <p class="text-success text-center" th:if="${message}" th:text="${message}"></p>
             <p class="text-center">Already have an account? <a href="/login">Login here</a></p>
         </form>
     </div>
