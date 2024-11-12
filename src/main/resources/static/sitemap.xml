@@ -8,11 +8,11 @@
     <url>
         <loc>https://www.metroease.run.place/login</loc>
         <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.metroease.run.place/register</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
     </url>
 </urlset>
