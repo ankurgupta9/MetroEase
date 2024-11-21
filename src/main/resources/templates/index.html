@@ -20,7 +20,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
-<!--                     <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" style="cursor:not-allowed" href="/">Custom</a>
                     </li> -->
                 </ul>
@@ -71,7 +71,38 @@
             <div class="mt-4" id="resultSection">
                 <h3 class="text-center">Shortest Route</h3>
                 <p id="shortestRoute"></p>
-                <h4 class="text-center">Estimate Fare: <span id="totalFare"></span></h4>
+                <!-- <h4 class="text-center">Estimate Fare: <span id="totalFare"></span></h4>
+                <h4 class="text-center">Smart Card Fare: <span id="smartFare"></span><span class="h6 m-1 rounded rounded-3 border p-1 text-muted" id="discount"></span></h4>
+                <h4 class="text-center">Estimate Time: <span id="time"></span></h4> -->
+                <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
+                    <!-- Estimate Fare Card -->
+                    <div class="card text-center border" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Estimate Fare</h5>
+                            <p class="card-text"><span id="totalFare"></span></p>
+                        </div>
+                    </div>
+                
+                    <!-- Smart Card Fare Card -->
+                    <div class="card text-center border" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Smart Card Fare</h5>
+                            <p class="card-text">
+                                <span id="smartFare"></span>
+                                <span class="badge bg-secondary ms-2" id="discount"></span>
+                            </p>
+                        </div>
+                    </div>
+                
+                    <!-- Estimate Time Card -->
+                    <div class="card text-center border" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Estimate Time</h5>
+                            <p class="card-text"><span id="time"></span></p>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             <div class="notes" style="margin-top: 10px; font-size: 0.9em; color: #555;">
                 <p><strong>Note:</strong></p>
@@ -81,6 +112,7 @@
                         interchange stations.</li>
                     <li>Use the search box to find your desired station quickly.</li>
                     <li>All other stations are displayed in their respective Line colors.</li>
+                    <li>Time shown is estimated travel time only (subject to change due to any inevitable reasons). Passengers are advised to keep extra time to travel.</li>
                 </ul>
             </div>
         </div>
