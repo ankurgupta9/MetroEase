@@ -1,3 +1,101 @@
+// document.getElementById('routeForm').addEventListener('submit', function (event) {
+//     event.preventDefault();
+
+//     // Get the selected values
+//     const source = document.getElementById('searchBox1').value;
+//     const destination = document.getElementById('searchBox2').value;
+
+//     // Calculate the shortest route and fare (dummy data here for demonstration)
+//     const shortestRoute = `From ${source} to ${destination}`;
+//     const totalFare = `₹50`;
+
+//     // Display the result
+//     document.getElementById('shortestRoute').textContent = shortestRoute;
+//     document.getElementById('totalFare').textContent = totalFare;
+//     document.getElementById('resultSection').classList.add('show');
+// });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     const searchBox = document.getElementById("searchBox1");
+//     const autocompleteList = document.getElementById("autocompleteList1");
+
+//     const items = ["Apple", "Banana", "Cherry", "Date", "Fig", "Grape", "Kiwi", "Lemon", "Mango", "Orange", "Papaya", "Quince", "Raspberry", "Strawberry", "Tomato", "Ugli fruit", "Vanilla", "Watermelon"];
+
+//     searchBox.addEventListener("input", function () {
+//         const value = this.value.toLowerCase();
+//         autocompleteList.innerHTML = "";
+
+//         var matchFound=false;
+
+//         items.forEach(function (item) {
+//             if (item.toLowerCase().includes(value)) {
+//                 matchFound=true;
+//                 const listItem = document.createElement("div");
+//                 listItem.textContent = item;
+//                 listItem.addEventListener("click", function () {
+//                     searchBox.value = item;
+//                     autocompleteList.innerHTML = "";
+//                 });
+//                 autocompleteList.appendChild(listItem);
+//             }
+//         });
+
+//         if (!matchFound) {
+//             const noMatchItem = document.createElement("div");
+//             noMatchItem.textContent = "No station found";
+//             autocompleteList.appendChild(noMatchItem);
+//         }
+//     });
+
+//     document.addEventListener("click", function (e) {
+//         if (e.target !== searchBox) {
+//             autocompleteList.innerHTML = "";
+//         }
+//     });
+// });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     const searchBox = document.getElementById("searchBox2");
+//     const autocompleteList = document.getElementById("autocompleteList2");
+
+//     const items = ["Apple", "Banana", "Cherry", "Date", "Fig", "Grape", "Kiwi", "Lemon", "Mango", "Orange", "Papaya", "Quince", "Raspberry", "Strawberry", "Tomato", "Ugli fruit", "Vanilla", "Watermelon"];
+
+//     searchBox.addEventListener("input", function () {
+//         const value = this.value.toLowerCase();
+//         autocompleteList.innerHTML = "";
+//         // if (!value) {
+//         //     return false;
+//         // }
+
+//         var matchFound=false;
+
+//         items.forEach(function (item) {
+//             if (item.toLowerCase().includes(value)) {
+//                 matchFound=true;
+//                 const listItem = document.createElement("div");
+//                 listItem.textContent = item;
+//                 listItem.addEventListener("click", function () {
+//                     searchBox.value = item;
+//                     autocompleteList.innerHTML = "";
+//                 });
+//                 autocompleteList.appendChild(listItem);
+//             }
+//         });
+
+//         if (!matchFound) {
+//             const noMatchItem = document.createElement("div");
+//             noMatchItem.textContent = "No station found";
+//             autocompleteList.appendChild(noMatchItem);
+//         }
+//     });
+
+//     document.addEventListener("click", function (e) {
+//         if (e.target !== searchBox) {
+//             autocompleteList.innerHTML = "";
+//         }
+//     });
+// });
+
 // Autocomplete function
 const stations = {
     // Red Line
@@ -284,7 +382,7 @@ const stations = {
     "Hauz Khas": "#000000",             // Yellow, Magenta Lines
     "Yamuna Bank": "#000000",           // Blue Line split
     "Kirti Nagar": "#000000",           // Blue, Green Lines
-    "Dwarka Sector 21": "#000000",      // Blue, Airport Express Lines
+    // "Dwarka Sector 21": "#000000",      // Blue, Airport Express Lines
     "Botanical Garden": "#000000",      // Blue, Magenta Lines
     "Mayur Vihar-1": "#000000",   // Blue, Pink Lines
     // "Anand Vihar ISBT": "#000000",      // Blue, Pink Lines
@@ -353,18 +451,23 @@ document.getElementById('routeForm').addEventListener('submit', function (event)
         .then(data => {
             // Extract station names from the response
             const stationNames = data.split(' -> ');
-
+            var count_interchange = 0;
             // Apply color to each station name
             const isMobile = window.innerWidth < 800;
 
-           // Define the arrow for desktop and mobile
+            // Define the arrow for desktop and mobile
             const desktopArrow = '🢥';
             const mobileArrow = '➡';
 
-           // Choose the appropriate arrow based on the device
+            // Choose the appropriate arrow based on the device
             const arrow = isMobile ? mobileArrow : desktopArrow;
+
+            // Apply color to each station name
             const coloredRoute = stationNames.map(name => {
                 const color = stations[name] || '#000000'; // Default to black if color not found
+                if (color === '#000000') {
+                    count_interchange++;
+                }
                 return `<span style="margin:5px; background-color:${color}" class="text-light station rounded p-1 border border-light">${name}</span>`;
             }).join(arrow);
 
@@ -376,7 +479,13 @@ document.getElementById('routeForm').addEventListener('submit', function (event)
             if (distanceMatch) {
                 const distance = parseInt(distanceMatch[1], 10);
                 const fare = calculateFare(distance);
+                const smartfare = smartFare(distance);
+                const Discount = discount();
+                const Time = time(distance, count_interchange);
                 document.getElementById('totalFare').innerText = `₹${fare}`;
+                document.getElementById('smartFare').innerText = `₹${smartfare}`;
+                document.getElementById('discount').innerText = `${Discount}%`;
+                document.getElementById('time').innerText = `${Time} min`;
             } else {
                 document.getElementById('totalFare').innerText = 'N/A';
             }
@@ -389,12 +498,12 @@ document.getElementById('routeForm').addEventListener('submit', function (event)
 document.addEventListener('click', function (event) {
     const dropdownMenu = document.getElementById('searchBox1');
     const inputBox = document.getElementById('searchBox1');
-  
+
     if (!inputBox.contains(event.target) && !dropdownMenu.contains(event.target)) {
-      dropdownMenu.classList.remove('show'); // This closes the dropdown
+        dropdownMenu.classList.remove('show'); // This closes the dropdown
     }
-  });
-  
+});
+
 
 // Function to calculate fare based on distance
 function calculateFare(distance) {
@@ -414,3 +523,44 @@ function calculateFare(distance) {
         return 60;  // Fare for more than 32 KMs
     }
 }
+
+function smartFare(distance) {
+
+    let baseFare = calculateFare(distance);
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+
+    // Check if it's an off-peak time for an additional 10% discount
+    const isOffPeak = !(currentHour >= 8 && currentHour < 12 || currentHour >= 17 && currentHour < 21);
+    if (isOffPeak) {
+        baseFare -= baseFare * 0.20;
+    }
+    else{
+        baseFare -= baseFare * 0.10;
+    }
+
+    // baseFare = Math.floor(baseFare);
+    return baseFare;
+}
+
+function discount() {
+    let discount = -10;
+
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+
+    const isOffPeak = !(currentHour >= 8 && currentHour < 12 || currentHour >= 17 && currentHour < 21);
+    if (isOffPeak) {
+        discount = -20;
+    }
+    return discount;
+}
+
+function time(distance, count_interchange) {
+
+    let time = distance*2;
+    time += count_interchange * 6;
+
+    return time - 6;
+}
+
