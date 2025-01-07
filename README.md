@@ -24,3 +24,6 @@ View the visualized path and fare displayed on the result page.
 Future Enhancements - 
 Mobile-friendly UI improvements.
 Add more metro lines and stations for further expansion.
+
+Home Page-
+![1734008026043](https://github.com/user-attachments/assets/79b47913-ab7a-4a5e-9dbf-02f9f6c1ece8)
