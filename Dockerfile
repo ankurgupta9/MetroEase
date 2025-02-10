@@ -1,24 +1,25 @@
-# Use an official OpenJDK runtime as a parent image
+# Use official OpenJDK 21 image
 FROM eclipse-temurin:21-jdk
 
-# Set working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy Maven Wrapper and project files
-COPY .mvn/ .mvn/
+# Copy Maven wrapper and project files
+COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
+COPY src/ src/
 
-# Give execute permission to mvnw
+# Grant execute permission to Maven wrapper
 RUN chmod +x mvnw
 
-# Build the application
+# Build the project inside the container
 RUN ./mvnw clean package -DskipTests
 
-# Copy built JAR file to container
-COPY target/*.jar app.jar
+# Copy the built JAR file
+RUN cp target/*.jar app.jar
 
 # Expose the port your app runs on
 EXPOSE 8080
 
-# Run the JAR file
+# Run the application
 CMD ["java", "-jar", "app.jar"]
