@@ -132,8 +132,8 @@ public class MetroServices {
     }
 
     static class Node implements Comparable<Node> {
-        int vertex; // represents station index
-        int key; // current shortest distance from source
+        int vertex;  // represents station index
+        int key;     // current shortest distance from source
 
         Node(int vertex, int key) {
             this.vertex = vertex;
@@ -141,7 +141,7 @@ public class MetroServices {
         }
 
         @Override
-        public int compareTo(Node other) { // sort nodes by their key value
+        public int compareTo(Node other) { 
             return Integer.compare(this.key, other.key);
         }
     }
